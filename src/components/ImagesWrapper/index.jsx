@@ -10,7 +10,7 @@ const fadeAnimation = {
     transition: { duration: 0.5 },
 }
 
-function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, handleImageLoad, loadedImages, animes, toggleFavorite }) {
+function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, handleImageLoad, loadedImages, animes, toggleFavorite, updateFavorites }) {
     function getAnimeImageUrl(anime) {
         let animeImage = ''
 
@@ -25,7 +25,7 @@ function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, han
     return (
         <div className='images-wrapper'>
             <AnimatePresence mode='wait'>
-                <motion.div className='images-wrapper' {...fadeAnimation} key={`${favoritesOnly}-${favoritesOnly ? favoritesPage : page}`}>
+                <motion.div className='images-wrapper' {...fadeAnimation} key={`${updateFavorites}-${favoritesOnly}-${favoritesOnly ? favoritesPage : page}`}>
                 {
                     favoritesOnly && favoriteAnimes.data.length ? favoriteAnimes.data.map((a, i) => {
                         return (
@@ -73,6 +73,7 @@ ImagesWrapper.propTypes = {
     loadedImages: PropTypes.array,
     toggleFavorite: PropTypes.func,
     favoritesOnly: PropTypes.bool,
+    updateFavorites: PropTypes.bool,
     favoriteAnimes: PropTypes.array,
     favoritesPage: PropTypes.number,
     page: PropTypes.number,

@@ -17,6 +17,7 @@ function Dashboard() {
     const [loadedImages, setLoadedImages] = useState({})
     const [loading, setLoading] = useState(false)
     const [favoritesOnly, setFavoritesOnly] = useState(false)
+    const [updateFavoriteAnimes, setUpdateFavoriteAnimes] = useState(false)
 
     useEffect(() => {
         async function loadAnimes() {
@@ -44,15 +45,19 @@ function Dashboard() {
 
             if (user) {
                 setLoading(true)
-                const { response } = await getAllFavoriteAnimes(user.sub, favoritesPage)
+                const pageToUse = favoritesPage || 1
+
+                const { response } = await getAllFavoriteAnimes(user.sub, pageToUse)
 
                 if (response && response.data && response.data.favoriteAnimes) {
                     const { data, pagination } = response.data.favoriteAnimes
 
                     setFavoriteAnimes({ data, pagination })
+                    setFavoritesPage(pagination.currentPage)
                 }
                 setLoadedImages({})
                 setLoading(false)
+                setUpdateFavoriteAnimes(false)
             }
         }
         if (favoritesOnly) {
@@ -123,6 +128,12 @@ function Dashboard() {
 
                 const filteredFavoriteAnimes = newFavoriteAnimes.filter(f => f.id !== animeId)
 
+                if (!filteredFavoriteAnimes.length) {
+                    const previousPage = favoritesPage - 1
+
+                    setFavoritesPage(previousPage)
+                }
+
                 setFavoriteAnimes({ ...favoriteAnimes, data: filteredFavoriteAnimes })
             }
 
@@ -189,6 +200,7 @@ function Dashboard() {
                     <ImagesWrapper 
                         animes={animes}
                         favoriteAnimes={favoriteAnimes}
+                        updateFavorites={updateFavoriteAnimes}
                         favoritesOnly={favoritesOnly}
                         favoritesPage={favoritesPage}
                         handleImageLoad={handleImageLoad}

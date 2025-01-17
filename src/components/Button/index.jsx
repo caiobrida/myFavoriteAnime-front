@@ -5,7 +5,7 @@ import './styles.css'
 
 function Button({ label, type, onClick, classes='' }) {
     return (
-        <button className={classes} onClick={onClick} type={type}>{label}</button>
+        <button className={`${classes} default-button`} onClick={onClick} type={type}>{label}</button>
     )
 }
 

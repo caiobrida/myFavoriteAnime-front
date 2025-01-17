@@ -36,7 +36,7 @@
     color: var(--branco)
   }
   
-  button {
+  .default-button {
     background-color: var(--rosa-choque);
     color: var(--branco);
     border: none;
@@ -52,7 +52,7 @@
     border: 1px solid var(--rosa-choque);
   }
   
-  button:hover {
+  .default-button:hover {
     background-color: var(--rosa-medio);
   }
   

@@ -1,0 +1,141 @@
+.dashboard {
+    border: 1px solid var(--rosa-choque-transparente);
+    border-radius: 1%;
+    padding: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.dashboard .images-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.image-container {
+    position: relative;
+    width: 225px;
+    height: 310px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.dashboard-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.image-container:hover .dashboard-image {
+    opacity: 0;
+}
+
+.additional-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background: var(--vinho-escuro);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.image-container:hover .additional-info {
+    opacity: 1;
+}
+
+.next-button {
+    color: var(--branco);
+    opacity: .5;
+    font-size: 50px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.previous-button {
+    color: var(--branco);
+    opacity: .5;
+    font-size: 50px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.next-button:hover {
+    color: var(--rosa-choque);
+    font-size: 65px;
+    opacity: 1;
+}
+
+.previous-button:hover {
+    color: var(--rosa-choque);
+    font-size: 65px;
+    opacity: 1;
+}
+
+.dashboard-favorite-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.dashboard-favorite-button span {
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.dashboard-favorite-button span:hover {
+    color: var(--rosa-choque);
+}
+
+.dashboard-favorite-selected {
+    color: var(--rosa-choque);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.dashboard-images-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite-heart {
+    cursor: pointer;
+    width: fit-content;
+}
+
+@media only screen and (max-width: 600px) {
+    .dashboard-favorite-button {
+        justify-content: center;
+    }
+}

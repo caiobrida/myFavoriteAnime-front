@@ -1,0 +1,17 @@
+header {
+    background: var(--vinho-escuro);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 40px;
+}
+header .header-logo {
+    font-size: 21px;
+}
+
+header .signout-header-wrapper span {
+    margin-right: 10px;
+}

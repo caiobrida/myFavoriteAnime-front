@@ -1,0 +1,101 @@
+:root {
+    --preto: #000;
+    --rosa-escuro: #0a020a;
+    --vinho-escuro: #0c020c;
+    --branco: #FFFFFF;
+    --rosa-choque: #FF007F;
+    --rosa-choque-transparente: #ff008018;
+    --rosa-claro: #FFC0CB;
+    --rosa-medio: #FF69B4;
+    --vermelho: #bd2929;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased !important;
+    background-color: var(--rosa-escuro);
+    color: var(--branco) !important;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+
+  *:focus {
+    outline: none;
+}
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--rosa-choque);
+  }
+  
+  p {
+    color: var(--branco);
+  }
+
+  input {
+    color: var(--branco)
+  }
+  
+  button {
+    background-color: var(--rosa-choque);
+    color: var(--branco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    min-width: 95px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .dark-button {
+    background-color: var(--rosa-escuro);
+    border: 1px solid var(--rosa-choque);
+  }
+  
+  button:hover {
+    background-color: var(--rosa-medio);
+  }
+  
+  .bg-rosa-escuro {
+    background-color: var(--rosa-escuro) !important;
+  }
+  
+  .bg-rosa-choque {
+    background-color: var(--rosa-choque) !important;
+  }
+  
+  .bg-rosa-claro {
+    background-color: var(--rosa-claro) !important;
+  }
+  
+  .bg-rosa-medio {
+    background-color: var(--rosa-medio) !important;
+  }
+  
+  .text-branco {
+    color: var(--branco) !important;
+  }
+  
+  .text-rosa-choque {
+    color: var(--rosa-choque) !important;
+  }
+  
+  .text-rosa-claro {
+    color: var(--rosa-claro) !important;
+  }
+  
+  .text-rosa-medio {
+    color: var(--rosa-medio) !important;
+  }
+
+  .text-rosa-choque-transparente {
+    color: var(--rosa-choque-transparente) !important;
+  }
+
+  .bg-gradient-rosa-45 {
+    background: linear-gradient(45deg, var(--preto), var(--preto), var(--preto), var(--rosa-medio));
+  }
+
+  .bg-gradient-rosa-225 {
+    background: linear-gradient(225deg, var(--preto), var(--preto), var(--preto), var(--rosa-medio));
+  }

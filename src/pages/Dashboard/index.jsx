@@ -24,6 +24,7 @@ function Dashboard() {
             const user = getCurrentUser()
 
             if (user) {
+                setLoadedImages({})
                 setLoading(true)
                 const { response } = await getAllAnimes(user.sub, page)
 
@@ -32,7 +33,7 @@ function Dashboard() {
 
                     setAnimes({ data, pagination })
                 }
-                setLoadedImages({})
+                
                 setLoading(false)
             }
         }
@@ -44,6 +45,7 @@ function Dashboard() {
             const user = getCurrentUser()
 
             if (user) {
+                setLoadedImages({})
                 setLoading(true)
                 const pageToUse = favoritesPage || 1
 
@@ -55,7 +57,6 @@ function Dashboard() {
                     setFavoriteAnimes({ data, pagination })
                     setFavoritesPage(pagination.currentPage)
                 }
-                setLoadedImages({})
                 setLoading(false)
                 setUpdateFavoriteAnimes(false)
             }

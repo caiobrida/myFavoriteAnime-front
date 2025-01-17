@@ -1,14 +1,13 @@
 
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Tooltip } from 'react-tippy';
-import { motion, AnimatePresence } from 'framer-motion'
-import { faChevronRight, faChevronLeft, faHeart, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faChevronLeft, faCheck } from '@fortawesome/free-solid-svg-icons'
 import './styles.css'
 import { getAllAnimes } from '../../services/animesService'
 import { getCurrentUser } from '../../services/authService'
 import { Colors } from '../../constants/Colors'
 import { createFavoriteAnime, deleteFavoriteAnime, getAllFavoriteAnimes } from '../../services/favoriteAnimesService'
+import ImagesWrapper from '../../components/ImagesWrapper';
 
 function Dashboard() {
     const [page, setPage] = useState(1)
@@ -173,13 +172,6 @@ function Dashboard() {
         setLoadedImages((prev) => ({ ...prev, [id]: true }))
     }
 
-    const fadeAnimation = {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: { duration: 0.5 },
-    }
-
     return (
         <div className='dashboard-wrapper'>
             <div className="dashboard-favorite-button">
@@ -194,79 +186,16 @@ function Dashboard() {
                         handlePrevious()
                     }
                 }} className="previous-button" icon={faChevronLeft} style={{ display: getPreviousArrowDisplay() }} />
-                    <div className='images-wrapper'>
-                        <AnimatePresence mode='wait'>
-                            <motion.div className='images-wrapper' {...fadeAnimation}key={`${favoritesOnly}-${favoritesOnly ? favoritesPage : page}`}>
-                            {
-                                favoritesOnly && favoriteAnimes.data.length ? favoriteAnimes.data.map((a, i) => {
-                                    let animeImage = a.animeImage
-
-                                    return (
-                                        <div className='dashboard-images-wrapper' key={i}>
-                                            <div className="image-container">
-                                                <img
-                                                    onLoad={() => handleImageLoad(a.id || i)}
-                                                    style={{ display: loadedImages[a.id || i] ? 'block' : 'none' }}
-                                                    className="dashboard-image"
-                                                    src={animeImage}
-                                                    alt="anime"
-                                                />
-                                                <span className="additional-info">
-                                                    <span><strong className='text-rosa-choque'>Name:</strong> {a.animeName}</span><br />
-                                                    <span><strong className='text-rosa-choque'>Episodes:</strong> {a.animeEpisodes || '??'}</span>
-                                                </span>
-                                            </div>
-                                            <Tooltip
-                                                title="Unfavorite..."
-                                                position="bottom"
-                                                trigger="mouseenter"
-                                                size='small'
-                                                arrow
-                                            >
-                                                <FontAwesomeIcon className='favorite-heart' onClick={() => toggleFavorite(a, true)} icon={faHeart} size='xl' color={ Colors.vermelho } />
-                                            </Tooltip>
-                                        </div>
-                                    )
-                                })  :
-                                favoritesOnly && !favoriteAnimes.data.length ? <span>Nothing here yet... Favorite some animes!</span>
-                                :
-                                animes.data.map((a, i) => {
-                                    return (
-                                        <div className='dashboard-images-wrapper' key={i}>
-                                            <div
-                                                className={`image-placeholder dashboard-images-wrapper ${loadedImages[a.id || i] ? 'loaded' : ''}`}
-                                                style={{ width: 245, height: 400 }} // Define tamanho fixo
-                                            >
-                                                <div className="image-container">
-                                                    <img
-                                                        onLoad={() => handleImageLoad(a.id || i)}
-                                                        style={{ display: loadedImages[a.id || i] ? 'block' : 'none' }}
-                                                        className="dashboard-image"
-                                                        src={getAnimeImageUrl(a)}
-                                                        alt="anime"
-                                                    />
-                                                    <span className="additional-info">
-                                                        <span><strong className='text-rosa-choque'>Name:</strong> {a.title}</span><br />
-                                                        <span><strong className='text-rosa-choque'>Episodes:</strong> {a.episodes || '??'}</span>
-                                                    </span>
-                                                </div>
-                                                <Tooltip
-                                                    title={a.favoriteAnime ? "Unfavorite..." : "Favorite!"}
-                                                    position="bottom"
-                                                    trigger="mouseenter"
-                                                    size='small'
-                                                    arrow
-                                                >
-                                                    <FontAwesomeIcon className='favorite-heart' onClick={() => toggleFavorite(a, !!a.favoriteAnime)} icon={faHeart} size='xl' color={ a.favoriteAnime ? Colors.vermelho : Colors.roxo } />
-                                                </Tooltip>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
+                    <ImagesWrapper 
+                        animes={animes}
+                        favoriteAnimes={favoriteAnimes}
+                        favoritesOnly={favoritesOnly}
+                        favoritesPage={favoritesPage}
+                        handleImageLoad={handleImageLoad}
+                        loadedImages={loadedImages}
+                        page={page}
+                        toggleFavorite={toggleFavorite}
+                    />
                     <FontAwesomeIcon onClick={() => {
                     if (favoritesOnly) {
                         handleFavoriteNext()

@@ -9,4 +9,4 @@ A aplicação possue autenticação (registro e login) e propõe que o usuário 
 - Para executar a aplicação, execute npm run dev
 
 # Observação
-Sei que não se deve subir o arquivo ".env" no repositório, apenas fiz isso para facilitar e acelerar o processo de configuração do projeto
+Sei que não se deve subir o arquivo ".env" no repositório, apenas fiz isso para facilitar e acelerar o processo de configuração do projeto, assim que terminarem de clonar e utilizar o projeto removerei ele.

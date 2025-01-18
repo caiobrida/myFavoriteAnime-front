@@ -71,14 +71,14 @@ function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, han
 
 ImagesWrapper.propTypes = {
     handleImageLoad: PropTypes.func,
-    loadedImages: PropTypes.array,
+    loadedImages: PropTypes.object,
     toggleFavorite: PropTypes.func,
     favoritesOnly: PropTypes.bool,
     searchKey: PropTypes.number,
-    favoriteAnimes: PropTypes.array,
+    favoriteAnimes: PropTypes.object,
     favoritesPage: PropTypes.number,
     page: PropTypes.number,
-    animes: PropTypes.array
+    animes: PropTypes.object
 }
 
 export default ImagesWrapper

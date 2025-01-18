@@ -35,13 +35,13 @@ function AnimeImage({ handleImageLoad, animeId, loadedImages, animeImage, animeE
 
 AnimeImage.propTypes = {
     handleImageLoad: PropTypes.func,
-    loadedImages: PropTypes.array,
+    loadedImages: PropTypes.object,
     animeImage: PropTypes.string,
     toggleFavorite: PropTypes.func,
     anime: PropTypes.object,
-    animeId: PropTypes.string,
+    animeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     animeName: PropTypes.string,
-    animeEpisodes: PropTypes.string,
+    animeEpisodes: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     favoriteAnime: PropTypes.bool,
 }
 

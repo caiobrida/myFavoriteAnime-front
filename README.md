@@ -4,6 +4,7 @@ A aplicação possue autenticação (registro e login) e propõe que o usuário 
 
 # Como executar localmente
 - Primeiramente, execute a api mencionada (tutorial de execução da api está no repositório dela), caso haja alteração na porta de execução da api, alterar a porta da variável de ambiente chamada "VITE_API_URL" no arquivo ".env".
+- Clone o repositório para seu ambiente local
 - No projeto frontend, execute npm install
 - Para executar a aplicação, execute npm run dev
 

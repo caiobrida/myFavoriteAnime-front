@@ -1,5 +1,5 @@
 # myFavoriteAnimes (FRONTEND)
-Esta é uma aplicação frontend que consome sua api [myFavoriteAnimes-api](https://github.com/caiobrida/myFavoriteAnime-api), ou seja, a api precisa estar sendo executada para que o frontend possa funcionar consumindo ela.
+Esta é uma aplicação frontend em ReactJS que consome sua api [myFavoriteAnimes-api](https://github.com/caiobrida/myFavoriteAnime-api), ou seja, a api precisa estar sendo executada para que o frontend possa funcionar consumindo ela.
 A aplicação possue autenticação (registro e login) e propõe que o usuário possa navegar e pesquisar animes, favoritar esses animes e também pode filtrar pelos seus animes favoritados.
 
 # Como executar localmente

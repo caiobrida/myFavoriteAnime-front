@@ -1,10 +1,11 @@
 import api from './api';
 
-async function getAllAnimes(userId, page=1) {
+async function getAllAnimes(userId, page=1, search='') {
     try{
       const response = await api.get(`/animes/list/${userId}`, {
         params: {
-            page
+            page,
+            search
         }
       });
       return {

@@ -1,10 +1,11 @@
 import api from './api';
 
-async function getAllFavoriteAnimes(userId, page=1) {
+async function getAllFavoriteAnimes(userId, page=1, search='') {
     try{
       const response = await api.get(`/favorites/list/${userId}`, {
         params: {
-            page
+            page,
+            search
         }
       });
       return {

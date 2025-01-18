@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import { AnimatePresence, motion } from "framer-motion"
 import DashboardImagesWrapper from "../DashboardImagesWrapper"
 import NotFoundFavoriteAnimes from "../NotFoundFavoriteAnimes"
+import NotFoundAnimes from "../NotFoundAnimes"
 
 const fadeAnimation = {
     initial: { opacity: 0 },
@@ -10,7 +11,7 @@ const fadeAnimation = {
     transition: { duration: 1 },
 }
 
-function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, handleImageLoad, loadedImages, animes, toggleFavorite, updateFavorites }) {
+function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, handleImageLoad, loadedImages, animes, toggleFavorite, searchKey }) {
     function getAnimeImageUrl(anime) {
         let animeImage = ''
 
@@ -25,7 +26,7 @@ function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, han
     return (
         <div className='images-wrapper'>
             <AnimatePresence mode='wait'>
-                <motion.div className='images-wrapper' {...fadeAnimation} key={`${updateFavorites}-${favoritesOnly}-${favoritesOnly ? favoritesPage : page}`}>
+                <motion.div className='images-wrapper' {...fadeAnimation} key={`${searchKey}-${favoritesOnly}-${favoritesOnly ? favoritesPage : page}`}>
                 {
                     favoritesOnly && favoriteAnimes.data.length ? favoriteAnimes.data.map((a, i) => {
                         return (
@@ -44,7 +45,7 @@ function ImagesWrapper({ favoritesOnly, favoriteAnimes, favoritesPage, page, han
                         )
                     })  :
                     favoritesOnly && !favoriteAnimes.data.length ? <NotFoundFavoriteAnimes />
-                    :
+                    : !favoritesOnly && !animes.data.length ? <NotFoundAnimes /> :
                     animes.data.map((a, i) => {
                         return (
                             <DashboardImagesWrapper 
@@ -73,7 +74,7 @@ ImagesWrapper.propTypes = {
     loadedImages: PropTypes.array,
     toggleFavorite: PropTypes.func,
     favoritesOnly: PropTypes.bool,
-    updateFavorites: PropTypes.bool,
+    searchKey: PropTypes.number,
     favoriteAnimes: PropTypes.array,
     favoritesPage: PropTypes.number,
     page: PropTypes.number,

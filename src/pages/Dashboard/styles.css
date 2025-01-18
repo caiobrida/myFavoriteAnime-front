@@ -134,6 +134,19 @@
     width: fit-content;
 }
 
+.dashboard-inputs {
+    margin-bottom: 30px;
+}
+
+.dashboard-inputs input {
+    width: 250px;
+}
+
+.dashboard-inputs input::placeholder {
+    color: var(--rosa-choque);
+    opacity: .5;
+}
+
 @media only screen and (max-width: 600px) {
     .dashboard-favorite-button {
         justify-content: center;

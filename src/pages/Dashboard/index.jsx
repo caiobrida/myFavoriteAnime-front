@@ -8,6 +8,7 @@ import { getCurrentUser } from '../../services/authService'
 import { Colors } from '../../constants/Colors'
 import { createFavoriteAnime, deleteFavoriteAnime, getAllFavoriteAnimes } from '../../services/favoriteAnimesService'
 import ImagesWrapper from '../../components/ImagesWrapper';
+import Input from '../../components/Input'
 
 function Dashboard() {
     const [page, setPage] = useState(1)
@@ -18,15 +19,39 @@ function Dashboard() {
     const [loading, setLoading] = useState(false)
     const [favoritesOnly, setFavoritesOnly] = useState(false)
     const [updateFavoriteAnimes, setUpdateFavoriteAnimes] = useState(false)
+    const [search, setSearch] = useState('')
+    const [debounceSearch, setDebounceSearch] = useState('')
+    const [favoriteSearch, setFavoriteSearch] = useState('')
+    const [debounceFavoriteSearch, setDebounceFavoriteSearch] = useState('')
+    const [searchKey, setSearchKey] = useState(0)
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setPage(1)
+            setDebounceSearch(search);
+          }, 800);
+      
+          return () => clearTimeout(handler);
+    }, [search])
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setFavoritesPage(1)
+            setDebounceFavoriteSearch(favoriteSearch);
+          }, 800);
+      
+          return () => clearTimeout(handler);
+    }, [favoriteSearch])
 
     useEffect(() => {
         async function loadAnimes() {
             const user = getCurrentUser()
 
             if (user) {
+                setSearchKey(searchKey + 1)
                 setLoadedImages({})
                 setLoading(true)
-                const { response } = await getAllAnimes(user.sub, page)
+                const { response } = await getAllAnimes(user.sub, page, debounceSearch)
 
                 if (response && response.data && response.data.animes) {
                     const { data, pagination } = response.data.animes
@@ -38,18 +63,19 @@ function Dashboard() {
             }
         }
         loadAnimes()
-    }, [page])
+    }, [page, debounceSearch])
 
     useEffect(() => {
         async function loadFavoriteAnimes() {
             const user = getCurrentUser()
 
             if (user) {
+                setSearchKey(searchKey + 1)
                 setLoadedImages({})
                 setLoading(true)
                 const pageToUse = favoritesPage || 1
 
-                const { response } = await getAllFavoriteAnimes(user.sub, pageToUse)
+                const { response } = await getAllFavoriteAnimes(user.sub, pageToUse, debounceFavoriteSearch)
 
                 if (response && response.data && response.data.favoriteAnimes) {
                     const { data, pagination } = response.data.favoriteAnimes
@@ -64,7 +90,7 @@ function Dashboard() {
         if (favoritesOnly) {
             loadFavoriteAnimes()
         }
-    }, [favoritesPage, favoritesOnly])
+    }, [favoritesPage, favoritesOnly, debounceFavoriteSearch])
 
     function handlePrevious() {
         if (page === 1 || loading) return
@@ -92,6 +118,8 @@ function Dashboard() {
 
     function toggleFavoritesOnly() {
         setFavoritesPage(1)
+        setSearch('')
+        setFavoriteSearch('')
 
         setFavoritesOnly(!favoritesOnly)
     }
@@ -180,12 +208,29 @@ function Dashboard() {
         }
     }
 
-    const handleImageLoad = (id) => {
+    function handleImageLoad(id) {
         setLoadedImages((prev) => ({ ...prev, [id]: true }))
+    }
+
+    function onSearchChange(e) {
+        setSearch(e.target.value)
+    }
+
+    function onFavoriteSearchChange(e) {
+        setFavoriteSearch(e.target.value)
     }
 
     return (
         <div className='dashboard-wrapper'>
+            <div className='inputs dashboard-inputs'>
+                <Input placeholder='Search anime...' type={'text'} value={favoritesOnly ? favoriteSearch : search} onChange={(e) => {
+                    if (favoritesOnly) {
+                        onFavoriteSearchChange(e)
+                    } else {
+                        onSearchChange(e)
+                    }
+                }} /> 
+            </div>
             <div className="dashboard-favorite-button">
                 <span onClick={toggleFavoritesOnly} className={favoritesOnly ? 'text-rosa-choque' : ''}>Favorites only</span>
                 {favoritesOnly ? <FontAwesomeIcon color={Colors.rosaChoque} icon={faCheck} size='sm' style={{ marginLeft: 5 }} /> : null}
@@ -198,7 +243,8 @@ function Dashboard() {
                         handlePrevious()
                     }
                 }} className="previous-button" icon={faChevronLeft} style={{ display: getPreviousArrowDisplay() }} />
-                    <ImagesWrapper 
+                    <ImagesWrapper
+                        searchKey={searchKey}
                         animes={animes}
                         favoriteAnimes={favoriteAnimes}
                         updateFavorites={updateFavoriteAnimes}

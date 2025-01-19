@@ -38,8 +38,8 @@
   
   .default-button {
     background-color: var(--rosa-choque);
+    border: 1px solid var(--rosa-choque);
     color: var(--branco);
-    border: none;
     padding: 10px 20px;
     border-radius: 5px;
     min-width: 95px;

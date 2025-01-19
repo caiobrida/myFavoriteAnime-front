@@ -1,14 +1,14 @@
 
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faChevronLeft, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import './styles.css'
 import { getAllAnimes } from '../../services/animesService'
 import { getCurrentUser } from '../../services/authService'
-import { Colors } from '../../constants/Colors'
 import { createFavoriteAnime, deleteFavoriteAnime, getAllFavoriteAnimes } from '../../services/favoriteAnimesService'
 import ImagesWrapper from '../../components/ImagesWrapper';
 import Input from '../../components/Input'
+import Button from '../../components/Button'
 
 function Dashboard() {
     const [page, setPage] = useState(1)
@@ -232,8 +232,7 @@ function Dashboard() {
                 }} /> 
             </div>
             <div className="dashboard-favorite-button">
-                <span onClick={toggleFavoritesOnly} className={favoritesOnly ? 'text-rosa-choque' : ''}>Favorites only</span>
-                {favoritesOnly ? <FontAwesomeIcon color={Colors.rosaChoque} icon={faCheck} size='sm' style={{ marginLeft: 5 }} /> : null}
+                <Button classes={ favoritesOnly ? '' : 'dark-button' } label={'Favorites only'} type={'button'}  onClick={toggleFavoritesOnly} />
             </div>
             <div className="dashboard">
                 <FontAwesomeIcon onClick={() => {

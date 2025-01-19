@@ -63,7 +63,8 @@ function Login() {
     }
 
     return (
-        <InputsContainer 
+        <InputsContainer
+            loading={loading}
             Title={() => (<>
                 <span>Hello!</span>
                 <p>Welcome to <strong className='text-branco'>my</strong>FavoriteAnimes</p>

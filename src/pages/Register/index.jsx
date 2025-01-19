@@ -73,7 +73,8 @@ function Register() {
     }
 
     return (
-        <InputsContainer 
+        <InputsContainer
+            loading={loading}
             Title={() => (<>
                 <span>Create account</span>
                 <p>We are glad to have you here!</p>

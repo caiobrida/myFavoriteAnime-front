@@ -45,12 +45,12 @@
     margin-top: 30px;
   }
 
-  .inputs-button {
+  .inputs-loading {
     margin-top: 45px;
+    margin-bottom: 10px;
   }
 
   .inputs-button button {
-    margin-top: 45px;
     margin-right: 10px
   }
 

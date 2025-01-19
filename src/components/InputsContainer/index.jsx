@@ -1,9 +1,11 @@
+import { Pulse } from 'react-svg-spinners'
 import PropTypes from 'prop-types'
 import Button from '../Button'
 import Input from '../Input'
 import './styles.css'
+import { Colors } from '../../constants/Colors'
 
-function InputsContainer({ inputs=[], errors=[], Title=<></>, buttons=[], containerBackground='bg-gradient-rosa-225' }) {
+function InputsContainer({ loading=false, inputs=[], errors=[], Title=<></>, buttons=[], containerBackground='bg-gradient-rosa-225' }) {
     return (
         <div className='flex-wrapper'>
             <div className={`inputs-container ${containerBackground}`}>
@@ -18,6 +20,10 @@ function InputsContainer({ inputs=[], errors=[], Title=<></>, buttons=[], contai
                     )) }
                 </div>
                 
+                <div className='inputs-loading'>
+                    { loading ? <Pulse color={ Colors.rosaChoque } /> : null } 
+                </div>
+
                 <div className='inputs-button'>
                     { buttons.map((b, i) => (
                         <Button key={i} classes={b.classes} label={b.label} type={b.type} onClick={b.onClick} />
@@ -33,7 +39,8 @@ InputsContainer.propTypes = {
     Title: PropTypes.func,
     buttons: PropTypes.array,
     errors: PropTypes.array,
-    containerBackground: PropTypes.string
+    containerBackground: PropTypes.string,
+    loading: PropTypes.bool
 }
 
 export default InputsContainer 

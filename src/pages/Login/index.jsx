@@ -10,6 +10,7 @@ function Login() {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState([])
+    const [loading, setLoading] = useState(false)
 
     function onUserNameChange(e) {
         setUserName(e.target.value)
@@ -38,14 +39,17 @@ function Login() {
     }
 
     async function handleLogin() {
-        if (!validate()) return
+        if (!validate() || loading) return
+
+        setLoading(true)
 
         const response = await login(userName, password)
 
         if (response.status === 409) return toast.error('Invalid credentials.')
         else if (response.status === 400) return toast.error('An unexpected error ocurred when logging in.')
-
+        
         navigate('/dashboard')
+        setLoading(false)
     }
 
     function handleCreateAccount() {

@@ -11,6 +11,7 @@ function Register() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors, setErrors] = useState([])
+    const [loading, setLoading] = useState(false)
 
     function onUserNameChange(e) {
         setUserName(e.target.value)
@@ -51,8 +52,8 @@ function Register() {
     }
 
     async function handleConfirm() {
-        if (!validate()) return
-
+        if (!validate() || loading) return
+        setLoading(true)
         const payload = {
             username: userName,
             password
@@ -65,6 +66,7 @@ function Register() {
         toast.info('User created successfuly!')
 
         navigate('/')
+        setLoading(false)
     }
 
     return (

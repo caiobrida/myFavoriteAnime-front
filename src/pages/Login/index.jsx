@@ -45,8 +45,14 @@ function Login() {
 
         const response = await login(userName, password)
 
-        if (response.status === 409) return toast.error('Invalid credentials.')
-        else if (response.status === 400) return toast.error('An unexpected error ocurred when logging in.')
+        if (response.status === 409) {
+            setLoading(false)
+            return toast.error('Invalid credentials.')
+        } 
+        else if (response.status === 400) {
+            setLoading(false)
+            return toast.error('An unexpected error ocurred when logging in.')
+        } 
         
         navigate('/dashboard')
         setLoading(false)

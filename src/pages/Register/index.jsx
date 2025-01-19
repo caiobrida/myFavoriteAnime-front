@@ -61,7 +61,10 @@ function Register() {
 
         const response = await register(payload)
 
-        if (response.status === 400) return toast.error('An error ocurred while creating user.')
+        if (response.status === 400) {
+            setLoading(false)
+            return toast.error('An error ocurred while creating user.')
+        } 
 
         toast.info('User created successfuly!')
 

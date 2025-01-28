@@ -63,7 +63,9 @@ function Register() {
 
         if (response.status === 400) {
             setLoading(false)
-            return toast.error('An error ocurred while creating user.')
+
+            const msg = `An error ocurred while creating user${response.message ? `: ${response.message}` : '.'}`
+            return toast.error(msg)
         } 
 
         toast.info('User created successfuly!')

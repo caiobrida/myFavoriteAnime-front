@@ -9,7 +9,7 @@ async function register(user) {
     } catch (err) {
       return {
         status: 400,
-        message: err.response.data.message,
+        message: err.response.data.msg,
       }
     }
   
